@@ -1,0 +1,21 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FontFamily x:Key="RobotoRegular">avares://Exodus/Assets/Resources/Fonts/roboto/Roboto-Regular.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoMedium">avares://Exodus/Assets/Resources/Fonts/roboto/Roboto-Medium.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoThin">avares://Exodus/Assets/Resources/Fonts/roboto/Roboto-Thin.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoLight">avares://Exodus/Assets/Resources/Fonts/roboto/Roboto-Light.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoLightItalic">avares://Exodus/Assets/Resources/Fonts/roboto/Roboto-LightItalic.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoBold">avares://Exodus/Assets/Resources/Fonts/roboto/Roboto-Bold.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoBlack">avares://Exodus/Assets/Resources/Fonts/roboto/Roboto-Black.ttf#Roboto</FontFamily>
+
+    <FontFamily x:Key="RobotoCondensedLight">avares://Exodus/Assets/Resources/Fonts/roboto-condensed/RobotoCondensed-Light.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoCondensedRegular">avares://Exodus/Assets/Resources/Fonts/roboto-condensed/RobotoCondensed-Regular.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoCondensedBold">avares://Exodus/Assets/Resources/Fonts/roboto-condensed/RobotoCondensed-Bold.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoCondensedMedium">avares://Exodus/Assets/Resources/Fonts/roboto-condensed/RobotoCondensed-Medium.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="RobotoCondensedSemiBold">avares://Exodus/Assets/Resources/Fonts/roboto-condensed/RobotoCondensed-SemiBold.ttf#Roboto</FontFamily>
+
+    <FontFamily x:Key="Nunito">avares://Exodus/Assets/Resources/Fonts/nunito/Nunito-VariableFont_wght.ttf#Nunito</FontFamily>
+    <FontFamily x:Key="NunitoItalic">avares://Exodus/Assets/Resources/Fonts/nunito/Nunito-Italic-VariableFont_wght.ttf#Nunito</FontFamily>
+
+    <FontFamily x:Key="Icomoon">avares://Exodus/Assets/Resources/Fonts/icomoon/icomoon.ttf#icomoon</FontFamily>
+</ResourceDictionary>
