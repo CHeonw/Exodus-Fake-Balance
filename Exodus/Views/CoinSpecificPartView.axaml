@@ -1,0 +1,1328 @@
+<Border xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Exodus.ViewModels"
+        xmlns:views="clr-namespace:Exodus.Views"
+        xmlns:controls="clr-namespace:Exodus.Controls"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Exodus.Views.CoinSpecificPartView"
+        x:DataType="viewModels:CoinSpecificPartViewModel">
+
+    <Design.DataContext>
+        <viewModels:CoinSpecificPartViewModel />
+    </Design.DataContext>
+
+    <Border.Background>
+        <!-- <LinearGradientBrush StartPoint="0%,100%" EndPoint="100%, 0%"> -->
+        <!--     <GradientStop Color="#121314" Offset="0" /> -->
+        <!--     <GradientStop Color="#22282D" Offset="1" /> -->
+        <!-- </LinearGradientBrush> -->
+        <ImageBrush Source="../Assets/Resources/Images/space.jpg" Stretch="UniformToFill" />
+    </Border.Background>
+    <ScrollViewer HorizontalAlignment="Stretch" IsScrollInertiaEnabled="True"
+                  VerticalAlignment="Stretch" Theme="{StaticResource ScrollViewerWithMouse}"
+                  HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <Grid>
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Margin="0,24,32,0"
+                            Orientation="Horizontal">
+                    <Button Background="Transparent"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Margin="0,0,8,0">
+                        <Viewbox Width="18">
+                            <Path Data="{DynamicResource Star}"
+                                  Fill="#63676A"
+                                  Stretch="Uniform" />
+                        </Viewbox>
+                    </Button>
+                    <Button Background="Transparent" VerticalAlignment="Center">
+                        <Viewbox Height="18">
+                            <Path Data="{DynamicResource ThreeDot}"
+                                  Fill="#AFB1B3"
+                                  Stretch="Uniform" />
+                        </Viewbox>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top"
+                            Margin="0,55,0,6">
+                    <Button Background="Transparent" Margin="0,0,0,6"
+                            HorizontalAlignment="Center" Command="{Binding RefreshCommand}"
+                            PointerEntered="LogoButton_OnPointerEntered"
+                            PointerExited="LogoButton_OnPointerExited">
+                        <Grid Height="{Binding BannerControlHeight}"
+                              MaxHeight="{Binding BannerControlHeight}"
+                              MinHeight="{Binding BannerControlHeight}">
+                            <Grid IsVisible="{Binding !IsShowRefresh}"
+                                  VerticalAlignment="Top">
+                                <Grid.Styles>
+                                    <Style Selector="Grid[IsVisible=True]">
+                                        <Style.Animations>
+                                            <Animation Duration="0:0:0.23">
+                                                <KeyFrame Cue="0%">
+                                                    <Setter Property="ScaleTransform.ScaleX" Value="0.85" />
+                                                    <Setter Property="ScaleTransform.ScaleY" Value="0.85" />
+                                                </KeyFrame>
+                                                <KeyFrame Cue="100%">
+                                                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                                                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                                                </KeyFrame>
+                                            </Animation>
+                                        </Style.Animations>
+                                    </Style>
+                                    <Style Selector="Grid[IsVisible=False]">
+                                        <Style.Animations>
+                                            <Animation Duration="0:0:0.23">
+                                                <KeyFrame Cue="0%">
+                                                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                                                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                                                </KeyFrame>
+                                                <KeyFrame Cue="100%">
+                                                    <Setter Property="ScaleTransform.ScaleX" Value="0.85" />
+                                                    <Setter Property="ScaleTransform.ScaleY" Value="0.85" />
+                                                </KeyFrame>
+                                            </Animation>
+                                        </Style.Animations>
+                                    </Style>
+                                </Grid.Styles>
+                                <UserControl ContentTemplate="{Binding BannerControl}" />
+                                <Viewbox Height="16" VerticalAlignment="Top"
+                                         HorizontalAlignment="Right"
+                                         IsVisible="{Binding IsCurrentlyPending}"
+                                         Margin="0,13,0,0">
+                                    <Path Data="{StaticResource CircleDot}"
+                                          Stretch="UniformToFill"
+                                          Fill="#26F895" />
+                                </Viewbox>
+                            </Grid>
+
+                            <Border IsVisible="{Binding IsShowRefresh}"
+                                    Width="80" Height="80" Background="{Binding Foreground2}"
+                                    CornerRadius="120" VerticalAlignment="Top">
+                                <Border.Styles>
+                                    <Style Selector="Border[IsVisible=True]">
+                                        <Style.Animations>
+                                            <Animation Duration="0:0:0.23">
+                                                <KeyFrame Cue="0%">
+                                                    <Setter Property="ScaleTransform.ScaleX" Value="0.85" />
+                                                    <Setter Property="ScaleTransform.ScaleY" Value="0.85" />
+                                                </KeyFrame>
+                                                <KeyFrame Cue="100%">
+                                                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                                                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                                                </KeyFrame>
+                                            </Animation>
+                                        </Style.Animations>
+                                    </Style>
+                                    <Style Selector="Border[IsVisible=False]">
+                                        <Style.Animations>
+                                            <Animation Duration="0:0:0.23">
+                                                <KeyFrame Cue="0%">
+                                                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                                                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                                                </KeyFrame>
+                                                <KeyFrame Cue="100%">
+                                                    <Setter Property="ScaleTransform.ScaleX" Value="0.85" />
+                                                    <Setter Property="ScaleTransform.ScaleY" Value="0.85" />
+                                                </KeyFrame>
+                                            </Animation>
+                                        </Style.Animations>
+                                    </Style>
+                                </Border.Styles>
+                                <Viewbox Width="32" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                         Classes.IsPlay="{Binding IsPlayRefresh}">
+                                    <Viewbox.Styles>
+                                        <Style Selector="Viewbox.IsPlay">
+                                            <Style.Animations>
+                                                <Animation Duration="0:0:1.75" IterationCount="Infinite">
+                                                    <KeyFrame Cue="0%">
+                                                        <Setter Property="RotateTransform.Angle" Value="0" />
+                                                    </KeyFrame>
+                                                    <KeyFrame Cue="100%">
+                                                        <Setter Property="RotateTransform.Angle" Value="360" />
+                                                    </KeyFrame>
+                                                </Animation>
+                                            </Style.Animations>
+                                        </Style>
+                                    </Viewbox.Styles>
+                                    <Path Data="{StaticResource Refresh}"
+                                          Stretch="Uniform"
+                                          Fill="White" />
+                                </Viewbox>
+                            </Border>
+                        </Grid>
+                    </Button>
+
+                    <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
+                            Margin="0,4,0,6"
+                            HorizontalAlignment="Center">
+                        <Border
+                            Width="197.56" Height="36" CornerRadius="18"
+                            Background="#4D080808" IsVisible="{Binding IsEthereum}">
+                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                <Border Grid.Column="0" Width="36" Height="36" VerticalAlignment="Center"
+                                        Background="Black" CornerRadius="100" HorizontalAlignment="Left">
+                                    <Image Source="/Assets/Resources/Icons/ethereum-icon.png"
+                                           Width="36" Stretch="Uniform"
+                                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" />
+                                </Border>
+                                <TextBlock Grid.Column="1" FontSize="14" Margin="0,0,3,0"
+                                           FontFamily="{StaticResource RobotoRegular}"
+                                           Text="Total ETH balance"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Foreground="White" />
+                                <Viewbox Grid.Column="2" HorizontalAlignment="Right"
+                                         VerticalAlignment="Center" Width="11"
+                                         Margin="0,0,10,0">
+                                    <Path Data="{StaticResource PointDownFullArrow}"
+                                          Stretch="Uniform"
+                                          Fill="White" Opacity="0.3" />
+                                </Viewbox>
+                            </Grid>
+                        </Border>
+                    </Button>
+
+                    <Grid ColumnDefinitions="Auto, *" HorizontalAlignment="Center"
+                          Margin="0,0,0,-5">
+                        <TextBlock Grid.Column="0" FontSize="64"
+                                   FontFamily="{StaticResource RobotoLight}"
+                                   FontWeight="300" Text="{Binding Balance}"
+                                   Foreground="{Binding Foreground1}"
+                                   Margin="0,0,2,0" />
+                        <TextBlock Grid.Column="1" FontSize="32" Margin="0,-46,0,0"
+                                   Foreground="{Binding Foreground1}" VerticalAlignment="Bottom"
+                                   FontFamily="{StaticResource RobotoCondensedLight}"
+                                   FontWeight="100" Text="{Binding MyCoin.Symbol}" LetterSpacing="1" />
+                    </Grid>
+                    <Grid ColumnDefinitions="Auto, *" HorizontalAlignment="Center">
+                        <TextBlock Grid.Column="0" FontSize="18.2"
+                                   FontFamily="{StaticResource RobotoLight}"
+                                   FontWeight="300" Opacity="0.5" Text="$"
+                                   VerticalAlignment="Bottom"
+                                   Margin="0,-24,0.5,0" />
+                        <TextBlock Grid.Column="1" FontSize="26"
+                                   FontFamily="{StaticResource RobotoLight}"
+                                   FontWeight="300" Text="{Binding BalanceInUsdString}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+            <Grid ColumnDefinitions="*, Auto" HorizontalAlignment="Center" Margin="62,3,0,0">
+                <Grid Column="0" ColumnDefinitions="*, *">
+                    <Button Grid.Column="0" Background="Transparent">
+                        <Border Height="44" Width="237" CornerRadius="30"
+                                BorderThickness="2" BorderBrush="{Binding Foreground1}">
+                            <TextBlock FontSize="16" FontFamily="{StaticResource RobotoLight}"
+                                       FontWeight="400" Text="Send"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </Button>
+                    <Button Grid.Column="1" Background="Transparent" Command="{Binding ReceiveCommand}">
+                        <Border Height="44" Width="237" CornerRadius="30"
+                                BorderThickness="2" BorderBrush="{Binding Foreground1}">
+                            <TextBlock FontSize="16" FontFamily="{StaticResource RobotoLight}"
+                                       FontWeight="400" Text="Receive"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </Button>
+                </Grid>
+                <Button Grid.Column="1" Background="Transparent">
+                    <Border Height="48" Width="48" CornerRadius="100"
+                            Background="{Binding Foreground2}">
+                        <Viewbox Width="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Path Data="{StaticResource Exchange}"
+                                  Fill="White"
+                                  Stretch="Uniform" />
+                        </Viewbox>
+                    </Border>
+                </Button>
+            </Grid>
+
+            <Grid IsVisible="{Binding !IsEthereum}">
+                <Border CornerRadius="0,0,12,12"
+                        HorizontalAlignment="Center" Background="#0D1112"
+                        Width="770" Height="108" Margin="0,18,0,10"
+                        IsVisible="{Binding IsTherePendingTransaction}">
+                    <Grid RowDefinitions="Auto, *">
+                        <Border Grid.Row="0" Height="3" HorizontalAlignment="Stretch">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0%, 50%" EndPoint="100%, 50%">
+                                    <GradientStop Color="#00BFFF" Offset="0" />
+                                    <GradientStop Color="#6619FF" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <Grid Grid.Row="1" Margin="0,0,8,0"
+                              ColumnDefinitions="Auto, *, Auto">
+                            <Image Grid.Column="0" Source="/Assets/Resources/Icons/icon-graph.png"
+                                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                                   Height="80" Stretch="Uniform" VerticalAlignment="Center" />
+
+                            <WrapPanel Grid.Column="1" HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Center"
+                                       Margin="-4,0,0,0">
+                                <TextBlock FontSize="16"
+                                           FontFamily="{StaticResource RobotoCondensedSemiBold}"
+                                           Text="{Binding TotalInPending}" VerticalAlignment="Center"
+                                           FontWeight="400" Margin="0,0,3,0"
+                                           HorizontalAlignment="Left"
+                                           TextAlignment="Left" />
+                                <TextBlock FontSize="14"
+                                           FontFamily="{StaticResource RobotoCondensedRegular}"
+                                           Text="is pending confirmation and can't be sent." VerticalAlignment="Center"
+                                           FontWeight="300"
+                                           HorizontalAlignment="Left" Opacity="0.8"
+                                           TextAlignment="Left" />
+                            </WrapPanel>
+
+                            <Button Grid.Column="2" Background="Transparent"
+                                    Margin="0,0,5,0">
+                                <Border Height="40" Width="150" CornerRadius="23">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0%, 50%" EndPoint="100%, 50%">
+                                            <GradientStop Color="#1B1E1F" Offset="0" />
+                                            <GradientStop Color="#252829" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <TextBlock FontSize="11"
+                                               FontFamily="{StaticResource RobotoRegular}"
+                                               Text="LEARN MORE" VerticalAlignment="Center"
+                                               FontWeight="Normal"
+                                               HorizontalAlignment="Center"
+                                               TextAlignment="Center" />
+                                </Border>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid Height="55" RowDefinitions="*, Auto"
+                  Margin="18,30">
+                <Grid Row="0" ColumnDefinitions="*, Auto"
+                      Margin="7,0">
+                    <TextBlock Grid.Column="0" FontSize="14"
+                               Margin="10,0,0,0"
+                               FontFamily="{StaticResource RobotoCondensedRegular}"
+                               Text="PRICE CHART" VerticalAlignment="Center" LetterSpacing="2.3"
+                               HorizontalAlignment="Left" FontWeight="300"
+                               TextAlignment="Left">
+                        <TextBlock.Styles>
+                            <Style Selector="TextBlock">
+                                <Setter Property="Opacity" Value="0.2" />
+                            </Style>
+                            <Style Selector="TextBlock:pointerover">
+                                <Setter Property="Opacity" Value="0.9" />
+                            </Style>
+                        </TextBlock.Styles>
+                    </TextBlock>
+                    <Button Grid.Column="1"
+                            Background="Transparent"
+                            VerticalAlignment="Center">
+                        <Viewbox Width="14">
+                            <Path
+                                Data="{StaticResource Expand}"
+                                Fill="White"
+                                Opacity="0.8"
+                                Stretch="Uniform" />
+                        </Viewbox>
+                    </Button>
+                </Grid>
+                <Border Grid.Row="1" HorizontalAlignment="Stretch" Height="1"
+                        Background="White" CornerRadius="3" Opacity="0.1" />
+            </Grid>
+
+            <Grid HorizontalAlignment="Stretch" Margin="18,0,18,12"
+                  RowDefinitions="Auto, Auto, *">
+                <StackPanel Grid.Row="0" Margin="10,0,0,10"
+                            Orientation="Horizontal">
+                    <Button Margin="3,0" Background="Transparent">
+                        <TextBlock FontSize="14"
+                                   FontFamily="{StaticResource RobotoCondensedRegular}"
+                                   Text="ACTIVITY" VerticalAlignment="Center" LetterSpacing="1"
+                                   HorizontalAlignment="Center" FontWeight="500"
+                                   TextAlignment="Center" />
+                    </Button>
+                    <Button Margin="3,0" Background="Transparent">
+                        <TextBlock FontSize="14"
+                                   FontFamily="{StaticResource RobotoCondensedRegular}"
+                                   Text="ABOUT" VerticalAlignment="Center" Opacity="0.3"
+                                   FontWeight="500"
+                                   HorizontalAlignment="Center" LetterSpacing="1"
+                                   TextAlignment="Center" />
+                    </Button>
+                    <Button Margin="3,0" Background="Transparent">
+                        <TextBlock FontSize="14"
+                                   FontFamily="{StaticResource RobotoCondensedRegular}"
+                                   Text="VIDEOS" VerticalAlignment="Center" Opacity="0.3"
+                                   HorizontalAlignment="Center" LetterSpacing="1" FontWeight="500"
+                                   TextAlignment="Center" />
+                    </Button>
+                </StackPanel>
+                <Border Grid.Row="1" HorizontalAlignment="Stretch" Height="1"
+                        Background="White" CornerRadius="3" Opacity="0.1" />
+
+                <Border Grid.Row="1" HorizontalAlignment="Left" Height="2" Width="60"
+                        Background="White" CornerRadius="3" Margin="20,0,0,0" />
+
+
+                <Grid Row="2" MinHeight="250" RowDefinitions="Auto, *">
+                    <Grid Row="0" IsVisible="{Binding IsEthereum}">
+                        <Border CornerRadius="12"
+                                HorizontalAlignment="Center" Background="#0D1112"
+                                Width="1090" Height="60" Margin="0,23,0,0"
+                                IsVisible="{Binding MyCoin.IsEmpty}">
+                            <Grid ColumnDefinitions="Auto, *, Auto" Margin="15,0">
+                                <Image Grid.Column="0" Source="/Assets/Resources/Icons/icon-low-gas.png"
+                                       RenderOptions.BitmapInterpolationMode="HighQuality" Margin="5,0,0,0"
+                                       Width="36" Stretch="Uniform" VerticalAlignment="Center" />
+
+                                <TextBlock Grid.Column="1" FontSize="14" Margin="18,0,0,0"
+                                           FontFamily="{StaticResource RobotoCondensedRegular}"
+                                           Text="Your ETH balance is low. Swap for or buy ETH to transact with ETH tokens."
+                                           VerticalAlignment="Center"
+                                           FontWeight="300" TextWrapping="WrapWithOverflow"
+                                           HorizontalAlignment="Left" Opacity="0.8"
+                                           TextAlignment="Left" />
+
+                                <Button Grid.Column="2" Background="Transparent">
+                                    <Border Height="40" Width="150" CornerRadius="23">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%, 50%" EndPoint="100%, 50%">
+                                                <GradientStop Color="#1B1E1F" Offset="0" />
+                                                <GradientStop Color="#252829" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <TextBlock FontSize="11"
+                                                   FontFamily="{StaticResource RobotoRegular}"
+                                                   Text="LEARN MORE" VerticalAlignment="Center"
+                                                   FontWeight="Normal"
+                                                   HorizontalAlignment="Center"
+                                                   TextAlignment="Center" />
+                                    </Border>
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="1" VerticalAlignment="Center">
+                        <Grid IsVisible="{Binding !IsEthereum}">
+                            <TextBlock IsVisible="{Binding !IsThereAnyTransaction}"
+                                       FontSize="24" FontFamily="{StaticResource RobotoLight}"
+                                       Text="No Bitcoin Transactions" VerticalAlignment="Center"
+                                       Foreground="#fafafa" Opacity="0.2"
+                                       HorizontalAlignment="Center" FontWeight="300"
+                                       TextAlignment="Center" />
+                        </Grid>
+                        <Grid IsVisible="{Binding IsEthereum}">
+                            <TextBlock IsVisible="{Binding !IsThereAnyTransaction}"
+                                       FontSize="24" FontFamily="{StaticResource RobotoLight}"
+                                       Text="No Ethereum Transactions" VerticalAlignment="Center"
+                                       Foreground="#fafafa" Opacity="0.2"
+                                       HorizontalAlignment="Center" FontWeight="300"
+                                       TextAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                    <StackPanel Grid.Row="1" IsVisible="{Binding IsThereAnyTransaction}">
+                        <StackPanel IsVisible="{Binding IsTherePendingTransaction}"
+                                    Margin="0,0,0,8">
+                            <TextBlock FontSize="14.5"
+                                       Margin="15,40,0,4"
+                                       FontFamily="{StaticResource RobotoCondensedRegular}"
+                                       Text="Pending"
+                                       VerticalAlignment="Center"
+                                       Opacity="0.25"
+                                       FontWeight="400" />
+                            <ItemsControl ItemsSource="{Binding PendingTransactions}"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Top"
+                                          Foreground="{Binding Foreground1}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Spacing="-5" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid RowDefinitions="Auto, *, Auto" Margin="0,2,25,2">
+                                            <!-- white stripe line -->
+                                            <Border Grid.Row="0" CornerRadius="5" Height="1"
+                                                    HorizontalAlignment="Stretch"
+                                                    Background="White" Opacity="0.08" />
+
+                                            <!-- main part of the transaction -->
+                                            <Border Grid.Row="1"
+                                                    HorizontalAlignment="Stretch">
+                                                <Grid RowDefinitions="Auto, *"
+                                                      HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Top">
+
+                                                    <!-- a control that shows when not expanded -->
+                                                    <Border Grid.Row="0"
+                                                            HorizontalAlignment="Stretch"
+                                                            Height="46">
+                                                        <Border.Styles>
+                                                            <Style Selector="Border">
+                                                                <Setter Property="Background"
+                                                                        Value="{Binding HeaderBackgroundColor}" />
+                                                            </Style>
+                                                            <Style Selector="Border:pointerover">
+                                                                <Setter Property="Background"
+                                                                        Value="#26000000" />
+                                                            </Style>
+                                                        </Border.Styles>
+                                                        <Grid ColumnDefinitions="Auto, *, Auto"
+                                                              VerticalAlignment="Stretch"
+                                                              HorizontalAlignment="Stretch"
+                                                              Margin="10,0,10,0">
+                                                            <StackPanel Grid.Column="0"
+                                                                        VerticalAlignment="Center"
+                                                                        Orientation="Horizontal">
+                                                                <controls:ThreeDotAnimation
+                                                                    VerticalAlignment="Center"
+                                                                    Margin="0,0,10,0" />
+                                                                <TextBlock FontSize="15"
+                                                                           FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                           Text="Receiving..."
+                                                                           VerticalAlignment="Center"
+                                                                           Foreground="{Binding $parent[ItemsControl].Foreground}"
+                                                                           FontWeight="300" />
+                                                            </StackPanel>
+                                                            <Grid Column="1"
+                                                                  HorizontalAlignment="Stretch" />
+                                                            <Grid Column="2"
+                                                                  ColumnDefinitions="*, Auto">
+                                                                <StackPanel Grid.Column="0"
+                                                                            VerticalAlignment="Center"
+                                                                            Orientation="Horizontal">
+                                                                    <Border Margin="0,5,60,5"
+                                                                            Background="#E6000000"
+                                                                            CornerRadius="5">
+                                                                        <TextBlock
+                                                                            Margin="6,3"
+                                                                            FontSize="12"
+                                                                            FontFamily="{StaticResource RobotoCondensedBold}"
+                                                                            Foreground="White"
+                                                                            Text="PENDING"
+                                                                            VerticalAlignment="Center"
+                                                                            HorizontalAlignment="Center"
+                                                                            TextAlignment="Center"
+                                                                            Opacity="0.9" />
+                                                                    </Border>
+                                                                    <Grid
+                                                                        ColumnDefinitions="Auto, *"
+                                                                        Margin="0,0,12,0">
+                                                                        <TextBlock Grid.Column="0"
+                                                                            FontSize="16"
+                                                                            FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                            Text="+"
+                                                                            VerticalAlignment="Center"
+                                                                            Margin="0,0,1,0"
+                                                                            Foreground="{Binding $parent[ItemsControl].Foreground}"
+                                                                            Opacity="0.8"
+                                                                            FontWeight="400" />
+                                                                        <TextBlock Grid.Column="1"
+                                                                            FontSize="16"
+                                                                            FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                            Text="{Binding Amount}"
+                                                                            VerticalAlignment="Center"
+                                                                            Foreground="{Binding $parent[ItemsControl].Foreground}"
+                                                                            Opacity="0.8"
+                                                                            FontWeight="400" />
+                                                                    </Grid>
+                                                                    <Button
+                                                                        Command="{Binding ExpandCommand}"
+                                                                        Background="Transparent"
+                                                                        VerticalAlignment="Center">
+                                                                        <Grid>
+                                                                            <Viewbox
+                                                                                IsVisible="{Binding IsExpanded}"
+                                                                                Width="14">
+                                                                                <Path
+                                                                                    Data="{StaticResource Collapse}"
+                                                                                    Fill="White"
+                                                                                    Opacity="0.8"
+                                                                                    Stretch="Uniform" />
+                                                                            </Viewbox>
+                                                                            <Viewbox
+                                                                                IsVisible="{Binding !IsExpanded}"
+                                                                                Width="14">
+                                                                                <Path
+                                                                                    Data="{StaticResource Expand}"
+                                                                                    Fill="White"
+                                                                                    Opacity="0.8"
+                                                                                    Stretch="Uniform" />
+                                                                            </Viewbox>
+                                                                        </Grid>
+                                                                    </Button>
+                                                                </StackPanel>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Border>
+
+                                                    <!-- a grid that shows when expanded -->
+                                                    <Grid Row="1" Background="#0F000000"
+                                                          Height="175"
+                                                          HorizontalAlignment="Stretch"
+                                                          IsVisible="{Binding IsExpanded}">
+                                                        <Grid HorizontalAlignment="Stretch"
+                                                              Margin="25,10"
+                                                              RowDefinitions="*, Auto"
+                                                              ColumnDefinitions="*, *, *">
+                                                            <Grid Column="0" ColumnSpan="3" Row="0"
+                                                                  ColumnDefinitions="*, *, *">
+                                                                <Grid Column="0"
+                                                                      RowDefinitions="*, *"
+                                                                      HorizontalAlignment="Stretch"
+                                                                      VerticalAlignment="Stretch">
+                                                                    <Grid Row="0"
+                                                                          ColumnDefinitions="Auto, *"
+                                                                          VerticalAlignment="Center">
+                                                                        <Border Grid.Column="0"
+                                                                            Height="26"
+                                                                            Width="2"
+                                                                            CornerRadius="5"
+                                                                            Background="#33FFFFFF"
+                                                                            Margin="0,0,8,0"
+                                                                            VerticalAlignment="Center" />
+                                                                        <Grid Column="1"
+                                                                              RowDefinitions="Auto, *">
+                                                                            <TextBlock Grid.Row="0"
+                                                                                FontSize="11"
+                                                                                FontFamily="{StaticResource RobotoRegular}"
+                                                                                Text="Date"
+                                                                                Foreground="White"
+                                                                                Margin="0,0,0,2"
+                                                                                Opacity="0.5"
+                                                                                FontWeight="400" />
+                                                                            <TextBlock Grid.Row="1"
+                                                                                FontSize="14"
+                                                                                FontFamily="{StaticResource RobotoRegular}"
+                                                                                Foreground="White"
+                                                                                Text="{Binding TimeString}"
+                                                                                Opacity="0.9"
+                                                                                FontWeight="300" />
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                    <Grid Row="1"
+                                                                          IsVisible="{Binding !$parent[views:CoinSpecificPartView].((viewModels:CoinSpecificPartViewModel)DataContext).IsEthereum}"
+                                                                          ColumnDefinitions="Auto, *"
+                                                                          VerticalAlignment="Center">
+                                                                        <Border Grid.Column="0"
+                                                                            Height="26"
+                                                                            Width="2"
+                                                                            CornerRadius="5"
+                                                                            Background="#33FFFFFF"
+                                                                            Margin="0,0,8,0"
+                                                                            VerticalAlignment="Center" />
+                                                                        <Grid Column="1"
+                                                                              RowDefinitions="Auto, *">
+                                                                            <TextBlock Grid.Row="0"
+                                                                                FontSize="11"
+                                                                                FontFamily="{StaticResource RobotoRegular}"
+                                                                                Text="To"
+                                                                                Foreground="White"
+                                                                                Margin="0,0,0,2"
+                                                                                Opacity="0.5"
+                                                                                FontWeight="400" />
+                                                                            <TextBlock Grid.Row="1"
+                                                                                FontSize="14"
+                                                                                FontFamily="{StaticResource RobotoRegular}"
+                                                                                Foreground="White"
+                                                                                Text="{Binding To}"
+                                                                                Opacity="0.9"
+                                                                                FontWeight="300" />
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                    <Grid Row="1"
+                                                                          IsVisible="{Binding $parent[views:CoinSpecificPartView].((viewModels:CoinSpecificPartViewModel)DataContext).IsEthereum}"
+                                                                          ColumnDefinitions="Auto, *"
+                                                                          VerticalAlignment="Center">
+                                                                        <Border Grid.Column="0"
+                                                                            Height="26"
+                                                                            Width="2"
+                                                                            CornerRadius="5"
+                                                                            Background="#33FFFFFF"
+                                                                            Margin="0,0,8,0"
+                                                                            VerticalAlignment="Center" />
+                                                                        <Grid Column="1"
+                                                                              RowDefinitions="Auto, *">
+                                                                            <TextBlock Grid.Row="0"
+                                                                                FontSize="11"
+                                                                                FontFamily="{StaticResource RobotoRegular}"
+                                                                                Text="Now"
+                                                                                Foreground="White"
+                                                                                Margin="0,0,0,2"
+                                                                                Opacity="0.5"
+                                                                                FontWeight="400" />
+                                                                            <TextBlock Grid.Row="1"
+                                                                                FontSize="14"
+                                                                                FontFamily="{StaticResource RobotoRegular}"
+                                                                                Foreground="White"
+                                                                                Text="{Binding PriceNowString}"
+                                                                                Opacity="0.9"
+                                                                                FontWeight="300" />
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </Grid>
+                                                                <Grid Column="1"
+                                                                      RowDefinitions="*, *">
+                                                                    <Grid Row="0"
+                                                                          ColumnDefinitions="Auto, *"
+                                                                          VerticalAlignment="Center">
+                                                                        <Border Grid.Column="0"
+                                                                            Height="26"
+                                                                            Width="2"
+                                                                            CornerRadius="5"
+                                                                            Background="#33FFFFFF"
+                                                                            Margin="0,0,8,0"
+                                                                            VerticalAlignment="Center" />
+                                                                        <Grid Column="1"
+                                                                              RowDefinitions="Auto, *">
+                                                                            <TextBlock Grid.Row="0"
+                                                                                FontSize="11"
+                                                                                FontFamily="{StaticResource RobotoRegular}"
+                                                                                Text="Transaction ID"
+                                                                                Foreground="White"
+                                                                                Margin="0,0,0,2"
+                                                                                Opacity="0.5"
+                                                                                FontWeight="400" />
+                                                                            <Button Grid.Row="1"
+                                                                                Margin="0" Padding="0"
+                                                                                Background="Transparent"
+                                                                                Command="{Binding OpenTransactionLook}">
+                                                                                <Button.Styles>
+                                                                                    <Style
+                                                                                        Selector="Button:pointerover">
+                                                                                        <Setter Property="Background"
+                                                                                            Value="{TemplateBinding Background}" />
+                                                                                        <Setter
+                                                                                            Property="RenderTransform"
+                                                                                            Value="scale(0.999)" />
+                                                                                    </Style>
+                                                                                    <Style Selector="Button:pressed">
+                                                                                        <Setter Property="Background"
+                                                                                            Value="{TemplateBinding Background}" />
+                                                                                        <Setter
+                                                                                            Property="RenderTransform"
+                                                                                            Value="scale(0.998)" />
+                                                                                    </Style>
+                                                                                </Button.Styles>
+                                                                                <Grid
+                                                                                    Margin="0,0,5,0"
+                                                                                    ColumnDefinitions="*, Auto">
+                                                                                    <TextBlock
+                                                                                        Grid.Column="0"
+                                                                                        FontSize="14"
+                                                                                        FontFamily="{StaticResource RobotoRegular}"
+                                                                                        TextTrimming="CharacterEllipsis"
+                                                                                        Text="{Binding TransactionId}"
+                                                                                        TextDecorations="Underline"
+                                                                                        Foreground="{Binding $parent[ItemsControl].Foreground}"
+                                                                                        VerticalAlignment="Center"
+                                                                                        HorizontalAlignment="Stretch"
+                                                                                        Opacity="0.9"
+                                                                                        FontWeight="300" />
+                                                                                    <Button
+                                                                                        Grid.Column="1"
+                                                                                        Background="Transparent"
+                                                                                        VerticalAlignment="Center"
+                                                                                        HorizontalAlignment="Left">
+                                                                                        <Viewbox
+                                                                                            Width="10">
+                                                                                            <Path
+                                                                                                Data="{StaticResource Copy}"
+                                                                                                Fill="White"
+                                                                                                Opacity="0.5" />
+                                                                                        </Viewbox>
+                                                                                    </Button>
+                                                                                </Grid>
+                                                                            </Button>
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                    <Grid Row="1"
+                                                                          IsVisible="{Binding !$parent[views:CoinSpecificPartView].((viewModels:CoinSpecificPartViewModel)DataContext).IsEthereum}"
+                                                                          ColumnDefinitions="Auto, *"
+                                                                          VerticalAlignment="Center">
+                                                                        <Border Grid.Column="0"
+                                                                            Height="26"
+                                                                            Width="2"
+                                                                            CornerRadius="5"
+                                                                            Background="#33FFFFFF"
+                                                                            Margin="0,0,8,0"
+                                                                            VerticalAlignment="Center" />
+                                                                        <Grid Column="1"
+                                                                              RowDefinitions="Auto, *">
+                                                                            <TextBlock Grid.Row="0"
+                                                                                FontSize="11"
+                                                                                FontFamily="{StaticResource RobotoRegular}"
+                                                                                Text="Now"
+                                                                                Foreground="White"
+                                                                                Margin="0,0,0,2"
+                                                                                Opacity="0.5"
+                                                                                FontWeight="400" />
+                                                                            <TextBlock Grid.Row="1"
+                                                                                FontSize="14"
+                                                                                FontFamily="{StaticResource RobotoRegular}"
+                                                                                Foreground="White"
+                                                                                Text="{Binding PriceNowString}"
+                                                                                Opacity="0.9"
+                                                                                FontWeight="300" />
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </Grid>
+                                                                <Grid Column="2"
+                                                                      RowDefinitions="*, *">
+                                                                    <Grid Row="0"
+                                                                          ColumnDefinitions="Auto, *"
+                                                                          VerticalAlignment="Center">
+                                                                        <Border Grid.Column="0"
+                                                                            Height="26"
+                                                                            Width="2"
+                                                                            CornerRadius="5"
+                                                                            Background="#33FFFFFF"
+                                                                            Margin="0,0,8,0"
+                                                                            VerticalAlignment="Center" />
+                                                                        <Grid Column="1"
+                                                                              RowDefinitions="Auto, *">
+                                                                            <TextBlock Grid.Row="0"
+                                                                                FontSize="11"
+                                                                                FontFamily="{StaticResource RobotoRegular}"
+                                                                                Text="From"
+                                                                                Foreground="White"
+                                                                                Margin="0,0,0,2"
+                                                                                Opacity="0.5"
+                                                                                FontWeight="400" />
+                                                                            <TextBlock Grid.Row="1"
+                                                                                FontSize="14"
+                                                                                FontFamily="{StaticResource RobotoRegular}"
+                                                                                Text="{Binding From}"
+                                                                                Foreground="White"
+                                                                                Opacity="0.9"
+                                                                                FontWeight="300" />
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                    <Grid Row="1"
+                                                                          VerticalAlignment="Stretch" />
+                                                                </Grid>
+                                                            </Grid>
+                                                            <Grid Grid.Row="1"
+                                                                  Grid.Column="0" Grid.ColumnSpan="2"
+                                                                  HorizontalAlignment="Stretch"
+                                                                  Margin="0,10,0,0">
+                                                                <Border
+                                                                    HorizontalAlignment="Stretch"
+                                                                    Height="40"
+                                                                    CornerRadius="8"
+                                                                    Background="#1f2123">
+                                                                    <Grid ColumnDefinitions="*, Auto" Margin="5,0">
+                                                                        <TextBox Grid.Column="0" Background="#1f2123"
+                                                                            BorderBrush="#1f2123"
+                                                                            CornerRadius="8"
+                                                                            Watermark="Personal note"
+                                                                            VerticalAlignment="Center"
+                                                                            BorderThickness="0"
+                                                                            VerticalContentAlignment="Center"
+                                                                            HorizontalAlignment="Stretch"
+                                                                            HorizontalContentAlignment="Stretch"
+                                                                            FontSize="14"
+                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                            Foreground="White"
+                                                                            Opacity="0.8" Margin="0,0,7,0"
+                                                                            FontWeight="400" />
+                                                                        <Border Grid.Column="1" CornerRadius="120"
+                                                                            VerticalAlignment="Center"
+                                                                            Margin="0,0,6,0"
+                                                                            Background="#2e3033"
+                                                                            Width="22" Height="22">
+                                                                            <Viewbox VerticalAlignment="Center"
+                                                                                Width="4.5"
+                                                                                HorizontalAlignment="Center">
+                                                                                <Path
+                                                                                    Data="{StaticResource IIcon}"
+                                                                                    Fill="White"
+                                                                                    Opacity="0.5"
+                                                                                    Stretch="UniformToFill" />
+                                                                            </Viewbox>
+                                                                        </Border>
+                                                                    </Grid>
+                                                                </Border>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                            </Border>
+
+                                            <!-- white stripe line -->
+                                            <Border Grid.Row="2" CornerRadius="5" Height="1"
+                                                    HorizontalAlignment="Stretch"
+                                                    Background="White" Opacity="0.08" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <ItemsControl ItemsSource="{Binding TransactionsGroups}"
+                                      IsVisible="{Binding IsThereTransaction}"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Top" Margin="0,0,0,12">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Spacing="-5" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid IsVisible="{Binding IsThereTransaction}" RowDefinitions="Auto, *"
+                                          Margin="0,40,0,0">
+                                        <TextBlock Grid.Row="0" FontSize="15" Opacity="0.25"
+                                                   Margin="15,0,0,7"
+                                                   FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                   Text="{Binding DateTitle}"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="White"
+                                                   FontWeight="400" />
+                                        <ItemsControl Grid.Row="1" ItemsSource="{Binding Transactions}"
+                                                      HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Top"
+                                                      Foreground="{Binding $parent[ItemsControl].((viewModels:CoinSpecificPartViewModel)DataContext).Foreground1}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Spacing="-5" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid RowDefinitions="Auto, *, Auto" Margin="0,2,25,2">
+                                                        <Border Grid.Row="0" CornerRadius="5" Height="1"
+                                                                HorizontalAlignment="Stretch"
+                                                                Background="White" Opacity="0.08" />
+                                                        <Border Grid.Row="1"
+                                                                HorizontalAlignment="Stretch">
+                                                            <Grid RowDefinitions="Auto, *"
+                                                                  HorizontalAlignment="Stretch"
+                                                                  VerticalAlignment="Top">
+                                                                <Border Grid.Row="0"
+                                                                        HorizontalAlignment="Stretch"
+                                                                        Height="46">
+                                                                    <Border.Styles>
+                                                                        <Style Selector="Border">
+                                                                            <Setter Property="Background"
+                                                                                Value="{Binding HeaderBackgroundColor}" />
+                                                                        </Style>
+                                                                        <Style Selector="Border:pointerover">
+                                                                            <Setter Property="Background"
+                                                                                Value="#26000000" />
+                                                                        </Style>
+                                                                    </Border.Styles>
+                                                                    <Grid ColumnDefinitions="Auto, *, Auto"
+                                                                          VerticalAlignment="Stretch"
+                                                                          HorizontalAlignment="Stretch"
+                                                                          Margin="10,0,10,0">
+                                                                        <StackPanel Grid.Column="0"
+                                                                            VerticalAlignment="Center"
+                                                                            Orientation="Horizontal">
+                                                                            <Viewbox
+                                                                                Width="14"
+                                                                                VerticalAlignment="Center"
+                                                                                Margin="0,0,10,0">
+                                                                                <Path
+                                                                                    Data="{StaticResource Received}"
+                                                                                    Fill="{Binding $parent[ItemsControl].Foreground}"
+                                                                                    Opacity="0.9"
+                                                                                    Stretch="Uniform" />
+                                                                            </Viewbox>
+                                                                            <TextBlock FontSize="15"
+                                                                                FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                                Text="Received"
+                                                                                VerticalAlignment="Center"
+                                                                                Foreground="{Binding $parent[ItemsControl].Foreground}"
+                                                                                FontWeight="300" />
+                                                                            <TextBlock FontSize="14.5"
+                                                                                Margin="10,0,0,0"
+                                                                                FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                                Text="{Binding SentDurationsAgo}"
+                                                                                Foreground="White"
+                                                                                VerticalAlignment="Center"
+                                                                                Opacity="0.9"
+                                                                                FontWeight="400" />
+                                                                        </StackPanel>
+                                                                        <Grid Column="1"
+                                                                              HorizontalAlignment="Stretch" />
+                                                                        <Grid Column="2"
+                                                                              ColumnDefinitions="*, Auto">
+                                                                            <StackPanel Grid.Column="0"
+                                                                                VerticalAlignment="Center"
+                                                                                Orientation="Horizontal">
+                                                                                <Grid
+                                                                                    ColumnDefinitions="Auto, *"
+                                                                                    Margin="0,0,12,0">
+                                                                                    <TextBlock Grid.Column="0"
+                                                                                        FontSize="16"
+                                                                                        FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                                        Text="+"
+                                                                                        VerticalAlignment="Center"
+                                                                                        Margin="0,0,1,0"
+                                                                                        Foreground="{Binding $parent[ItemsControl].Foreground}"
+                                                                                        Opacity="0.8"
+                                                                                        FontWeight="400" />
+                                                                                    <TextBlock Grid.Column="1"
+                                                                                        FontSize="16"
+                                                                                        FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                                        Text="{Binding Amount}"
+                                                                                        VerticalAlignment="Center"
+                                                                                        Foreground="{Binding $parent[ItemsControl].Foreground}"
+                                                                                        Opacity="0.8"
+                                                                                        FontWeight="400" />
+                                                                                </Grid>
+                                                                                <Button
+                                                                                    Command="{Binding ExpandCommand}"
+                                                                                    Background="Transparent"
+                                                                                    VerticalAlignment="Center">
+                                                                                    <Grid>
+                                                                                        <Viewbox
+                                                                                            IsVisible="{Binding IsExpanded}"
+                                                                                            Width="14">
+                                                                                            <Path
+                                                                                                Data="{StaticResource Collapse}"
+                                                                                                Fill="White"
+                                                                                                Opacity="0.8"
+                                                                                                Stretch="Uniform" />
+                                                                                        </Viewbox>
+                                                                                        <Viewbox
+                                                                                            IsVisible="{Binding !IsExpanded}"
+                                                                                            Width="14">
+                                                                                            <Path
+                                                                                                Data="{StaticResource Expand}"
+                                                                                                Fill="White"
+                                                                                                Opacity="0.8"
+                                                                                                Stretch="Uniform" />
+                                                                                        </Viewbox>
+                                                                                    </Grid>
+                                                                                </Button>
+                                                                            </StackPanel>
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </Border>
+                                                                <Grid Row="1" Background="#0F000000"
+                                                                      Height="175"
+                                                                      HorizontalAlignment="Stretch"
+                                                                      IsVisible="{Binding IsExpanded}">
+                                                                    <Grid HorizontalAlignment="Stretch"
+                                                                          Margin="25,10"
+                                                                          RowDefinitions="*, Auto"
+                                                                          ColumnDefinitions="*, *, *">
+                                                                        <Grid Column="0" ColumnSpan="3" Row="0"
+                                                                              ColumnDefinitions="*, *, *">
+
+                                                                            <Grid Column="0"
+                                                                                RowDefinitions="*, *"
+                                                                                HorizontalAlignment="Stretch"
+                                                                                VerticalAlignment="Stretch">
+                                                                                <Grid Row="0"
+                                                                                    ColumnDefinitions="Auto, *"
+                                                                                    VerticalAlignment="Center">
+                                                                                    <Border Grid.Column="0"
+                                                                                        Height="26"
+                                                                                        Width="2"
+                                                                                        CornerRadius="5"
+                                                                                        Background="#33FFFFFF"
+                                                                                        Margin="0,0,8,0"
+                                                                                        VerticalAlignment="Center" />
+                                                                                    <Grid Column="1"
+                                                                                        RowDefinitions="Auto, *">
+                                                                                        <TextBlock Grid.Row="0"
+                                                                                            FontSize="11"
+                                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                                            Text="Date"
+                                                                                            Foreground="White"
+                                                                                            Margin="0,0,0,2"
+                                                                                            Opacity="0.5"
+                                                                                            FontWeight="400" />
+                                                                                        <TextBlock Grid.Row="1"
+                                                                                            FontSize="14"
+                                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                                            Foreground="White"
+                                                                                            Text="{Binding TimeString}"
+                                                                                            Opacity="0.9"
+                                                                                            FontWeight="300" />
+                                                                                    </Grid>
+                                                                                </Grid>
+                                                                                <Grid Row="1"
+                                                                                    IsVisible="{Binding !$parent[views:CoinSpecificPartView].((viewModels:CoinSpecificPartViewModel)DataContext).IsEthereum}"
+                                                                                    ColumnDefinitions="Auto, *"
+                                                                                    VerticalAlignment="Center">
+                                                                                    <Border Grid.Column="0"
+                                                                                        Height="26"
+                                                                                        Width="2"
+                                                                                        CornerRadius="5"
+                                                                                        Background="#33FFFFFF"
+                                                                                        Margin="0,0,8,0"
+                                                                                        VerticalAlignment="Center" />
+                                                                                    <Grid Column="1"
+                                                                                        RowDefinitions="Auto, *">
+                                                                                        <TextBlock Grid.Row="0"
+                                                                                            FontSize="11"
+                                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                                            Text="To"
+                                                                                            Foreground="White"
+                                                                                            Margin="0,0,0,2"
+                                                                                            Opacity="0.5"
+                                                                                            FontWeight="400" />
+                                                                                        <TextBlock Grid.Row="1"
+                                                                                            FontSize="14"
+                                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                                            Foreground="White"
+                                                                                            Text="{Binding To}"
+                                                                                            Opacity="0.9"
+                                                                                            FontWeight="300" />
+                                                                                    </Grid>
+                                                                                </Grid>
+                                                                                <Grid Row="1"
+                                                                                    IsVisible="{Binding $parent[views:CoinSpecificPartView].((viewModels:CoinSpecificPartViewModel)DataContext).IsEthereum}"
+                                                                                    ColumnDefinitions="Auto, *"
+                                                                                    VerticalAlignment="Center">
+                                                                                    <Border Grid.Column="0"
+                                                                                        Height="26"
+                                                                                        Width="2"
+                                                                                        CornerRadius="5"
+                                                                                        Background="#33FFFFFF"
+                                                                                        Margin="0,0,8,0"
+                                                                                        VerticalAlignment="Center" />
+                                                                                    <Grid Column="1"
+                                                                                        RowDefinitions="Auto, *">
+                                                                                        <TextBlock Grid.Row="0"
+                                                                                            FontSize="11"
+                                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                                            Text="Now"
+                                                                                            Foreground="White"
+                                                                                            Margin="0,0,0,2"
+                                                                                            Opacity="0.5"
+                                                                                            FontWeight="400" />
+                                                                                        <TextBlock Grid.Row="1"
+                                                                                            FontSize="14"
+                                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                                            Foreground="White"
+                                                                                            Text="{Binding PriceNowString}"
+                                                                                            Opacity="0.9"
+                                                                                            FontWeight="300" />
+                                                                                    </Grid>
+                                                                                </Grid>
+                                                                            </Grid>
+                                                                            <Grid Column="1"
+                                                                                RowDefinitions="*, *">
+                                                                                <Grid Row="0"
+                                                                                    ColumnDefinitions="Auto, *"
+                                                                                    VerticalAlignment="Center">
+                                                                                    <Border Grid.Column="0"
+                                                                                        Height="26"
+                                                                                        Width="2"
+                                                                                        CornerRadius="5"
+                                                                                        Background="#33FFFFFF"
+                                                                                        Margin="0,0,8,0"
+                                                                                        VerticalAlignment="Center" />
+                                                                                    <Grid Column="1"
+                                                                                        RowDefinitions="Auto, *">
+                                                                                        <TextBlock Grid.Row="0"
+                                                                                            FontSize="11"
+                                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                                            Text="Transaction ID"
+                                                                                            Foreground="White"
+                                                                                            Margin="0,0,0,2"
+                                                                                            Opacity="0.5"
+                                                                                            FontWeight="400" />
+                                                                                        <Button Grid.Row="1"
+                                                                                            Margin="0" Padding="0"
+                                                                                            Background="Transparent"
+                                                                                            Command="{Binding OpenTransactionLook}">
+                                                                                            <Button.Styles>
+                                                                                                <Style
+                                                                                                    Selector="Button:pointerover">
+                                                                                                    <Setter
+                                                                                                        Property="Background"
+                                                                                                        Value="{TemplateBinding Background}" />
+                                                                                                    <Setter
+                                                                                                        Property="RenderTransform"
+                                                                                                        Value="scale(0.999)" />
+                                                                                                </Style>
+                                                                                                <Style
+                                                                                                    Selector="Button:pressed">
+                                                                                                    <Setter
+                                                                                                        Property="Background"
+                                                                                                        Value="{TemplateBinding Background}" />
+                                                                                                    <Setter
+                                                                                                        Property="RenderTransform"
+                                                                                                        Value="scale(0.998)" />
+                                                                                                </Style>
+                                                                                            </Button.Styles>
+                                                                                            <Grid
+                                                                                                Margin="0,0,5,0"
+                                                                                                ColumnDefinitions="*, Auto">
+                                                                                                <TextBlock
+                                                                                                    Grid.Column="0"
+                                                                                                    FontSize="14"
+                                                                                                    FontFamily="{StaticResource RobotoRegular}"
+                                                                                                    TextTrimming="CharacterEllipsis"
+                                                                                                    Text="{Binding TransactionId}"
+                                                                                                    TextDecorations="Underline"
+                                                                                                    Foreground="{Binding $parent[ItemsControl].Foreground}"
+                                                                                                    VerticalAlignment="Center"
+                                                                                                    HorizontalAlignment="Stretch"
+                                                                                                    Opacity="0.9"
+                                                                                                    FontWeight="300" />
+                                                                                                <Button
+                                                                                                    Grid.Column="1"
+                                                                                                    Background="Transparent"
+                                                                                                    VerticalAlignment="Center"
+                                                                                                    HorizontalAlignment="Left">
+                                                                                                    <Viewbox
+                                                                                                        Width="10">
+                                                                                                        <Path
+                                                                                                            Data="{StaticResource Copy}"
+                                                                                                            Fill="White"
+                                                                                                            Opacity="0.5" />
+                                                                                                    </Viewbox>
+                                                                                                </Button>
+                                                                                            </Grid>
+                                                                                        </Button>
+                                                                                    </Grid>
+                                                                                </Grid>
+                                                                                <Grid Row="1"
+                                                                                    IsVisible="{Binding !$parent[views:CoinSpecificPartView].((viewModels:CoinSpecificPartViewModel)DataContext).IsEthereum}"
+                                                                                    ColumnDefinitions="Auto, *"
+                                                                                    VerticalAlignment="Center">
+                                                                                    <Border Grid.Column="0"
+                                                                                        Height="26"
+                                                                                        Width="2"
+                                                                                        CornerRadius="5"
+                                                                                        Background="#33FFFFFF"
+                                                                                        Margin="0,0,8,0"
+                                                                                        VerticalAlignment="Center" />
+                                                                                    <Grid Column="1"
+                                                                                        RowDefinitions="Auto, *">
+                                                                                        <TextBlock Grid.Row="0"
+                                                                                            FontSize="11"
+                                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                                            Text="Now"
+                                                                                            Foreground="White"
+                                                                                            Margin="0,0,0,2"
+                                                                                            Opacity="0.5"
+                                                                                            FontWeight="400" />
+                                                                                        <TextBlock Grid.Row="1"
+                                                                                            FontSize="14"
+                                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                                            Text="{Binding PriceNowString}"
+                                                                                            Foreground="White"
+                                                                                            Opacity="0.9"
+                                                                                            FontWeight="300" />
+                                                                                    </Grid>
+                                                                                </Grid>
+                                                                            </Grid>
+                                                                            <Grid Column="2"
+                                                                                RowDefinitions="*, *">
+                                                                                <Grid Row="0"
+                                                                                    ColumnDefinitions="Auto, *"
+                                                                                    VerticalAlignment="Center">
+                                                                                    <Border Grid.Column="0"
+                                                                                        Height="26"
+                                                                                        Width="2"
+                                                                                        CornerRadius="5"
+                                                                                        Background="#33FFFFFF"
+                                                                                        Margin="0,0,8,0"
+                                                                                        VerticalAlignment="Center" />
+                                                                                    <Grid Column="1"
+                                                                                        RowDefinitions="Auto, *">
+                                                                                        <TextBlock Grid.Row="0"
+                                                                                            FontSize="11"
+                                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                                            Text="From"
+                                                                                            Foreground="White"
+                                                                                            Margin="0,0,0,2"
+                                                                                            Opacity="0.5"
+                                                                                            FontWeight="400" />
+                                                                                        <TextBlock Grid.Row="1"
+                                                                                            FontSize="14"
+                                                                                            FontFamily="{StaticResource RobotoRegular}"
+                                                                                            Text="{Binding From}"
+                                                                                            Foreground="White"
+                                                                                            Opacity="0.9"
+                                                                                            FontWeight="300" />
+                                                                                    </Grid>
+                                                                                </Grid>
+                                                                                <Grid Row="1"
+                                                                                    VerticalAlignment="Stretch" />
+                                                                            </Grid>
+                                                                        </Grid>
+                                                                        <Grid Grid.Row="1"
+                                                                              Grid.Column="0" Grid.ColumnSpan="2"
+                                                                              HorizontalAlignment="Stretch"
+                                                                              Margin="0,10,0,0">
+                                                                            <Border
+                                                                                HorizontalAlignment="Stretch"
+                                                                                Height="40"
+                                                                                CornerRadius="8"
+                                                                                Background="#1f2123">
+                                                                                <Grid ColumnDefinitions="*, Auto"
+                                                                                    Margin="5,0">
+                                                                                    <TextBox Grid.Column="0"
+                                                                                        Background="#1f2123"
+                                                                                        BorderBrush="#1f2123"
+                                                                                        CornerRadius="8"
+                                                                                        Watermark="Personal note"
+                                                                                        VerticalAlignment="Center"
+                                                                                        BorderThickness="0"
+                                                                                        VerticalContentAlignment="Center"
+                                                                                        HorizontalAlignment="Stretch"
+                                                                                        HorizontalContentAlignment="Stretch"
+                                                                                        FontSize="14"
+                                                                                        FontFamily="{StaticResource RobotoRegular}"
+                                                                                        Foreground="White"
+                                                                                        Opacity="0.8"
+                                                                                        Margin="0,0,7,0"
+                                                                                        FontWeight="400" />
+                                                                                    <Border Grid.Column="1"
+                                                                                        CornerRadius="120"
+                                                                                        VerticalAlignment="Center"
+                                                                                        Margin="0,0,6,0"
+                                                                                        Background="#2e3033"
+                                                                                        Width="22" Height="22">
+                                                                                        <Viewbox
+                                                                                            VerticalAlignment="Center"
+                                                                                            Width="4.5"
+                                                                                            HorizontalAlignment="Center">
+                                                                                            <Path
+                                                                                                Data="{StaticResource IIcon}"
+                                                                                                Fill="White"
+                                                                                                Opacity="0.5"
+                                                                                                Stretch="UniformToFill" />
+                                                                                        </Viewbox>
+                                                                                    </Border>
+                                                                                </Grid>
+                                                                            </Border>
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Border>
+                                                        <Border Grid.Row="2" CornerRadius="5" Height="1"
+                                                                HorizontalAlignment="Stretch"
+                                                                Background="White" Opacity="0.08" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</Border>
