@@ -1,0 +1,61 @@
+<Border xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Exodus.ViewModels"
+        x:Class="Exodus.Views.NotificationView"
+        Background="#101417" CornerRadius="0"
+        Width="360" Height="55"
+        x:DataType="viewModels:NotificationViewModel">
+    <Design.DataContext>
+        <viewModels:NotificationViewModel />
+    </Design.DataContext>
+    <Grid RowDefinitions="*, Auto">
+        <Grid Row="0" ColumnDefinitions="Auto, *, Auto, Auto, Auto, Auto"
+              VerticalAlignment="Stretch">
+            <Image Grid.Column="0" Source="{Binding Logo}"
+                   Height="32" Stretch="Uniform"
+                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                   VerticalAlignment="Center"
+                   Margin="15,0,10,0" />
+
+            <TextBlock Grid.Column="1" FontSize="14.5"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Left"
+                       FontFamily="{StaticResource RobotoMedium}"
+                       FontWeight="400" Text="Receiving..." Opacity="0.9" />
+
+            <TextBlock Grid.Column="2" FontSize="14.5" Margin="0,0,4,0"
+                       VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Right"
+                       FontFamily="{StaticResource RobotoCondensedMedium}" 
+                       Foreground="{Binding ViewPart.Foreground1}"
+                       FontWeight="SemiBold" Text="{Binding CurrentlyAdded}" Opacity="0.75" />
+
+            <TextBlock Grid.Column="3" FontSize="14.5"
+                       VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Right"
+                       FontFamily="{StaticResource RobotoCondensedMedium}" 
+                       Foreground="{Binding ViewPart.Foreground1}"
+                       FontWeight="SemiBold" Text="{Binding ViewPart.MyCoin.Symbol}" Opacity="0.75" />
+
+            <Rectangle Grid.Column="4" Width="1" VerticalAlignment="Stretch" Fill="White" Opacity="0.2"
+                       Margin="10, 0, 0, 0" />
+
+            <Button Grid.Column="5" Margin="8,0" Command="{Binding CloseNotification}"
+                    Background="Transparent" VerticalAlignment="Center">
+                <Viewbox Height="12" VerticalAlignment="Center">
+                    <Path Data="{StaticResource Close}"
+                          Fill="White" Opacity="0.9"
+                          Stretch="Uniform" />
+                </Viewbox>
+            </Button>
+        </Grid>
+        <Rectangle Grid.Row="1" Height="1.5"
+                   HorizontalAlignment="Left" Fill="White" Opacity="0.2"
+                   Width="{Binding NotificationStripeWidth}">
+            <Rectangle.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Width" Duration="0:0:3.65"/>
+                </Transitions>
+            </Rectangle.Transitions>
+        </Rectangle>
+    </Grid>
+</Border>
