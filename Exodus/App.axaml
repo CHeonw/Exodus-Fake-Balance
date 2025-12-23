@@ -1,0 +1,32 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Exodus.App"
+             xmlns:local="using:Exodus"
+             xmlns:scroll="using:CompositionScroll"
+             xmlns:converters="clr-namespace:Exodus.Helpers.Converters"
+             RequestedThemeVariant="Dark">
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+
+        <StyleInclude Source="/Assets/Resources/Icons/Icons.axaml" />
+
+        <StyleInclude Source="/Styles/ButtonStyles.axaml" />
+        <StyleInclude Source="/Styles/ToggleButtonStyles.axaml" />
+        <StyleInclude Source="/Styles/TextBoxStyles.axaml" />
+    </Application.Styles>
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://Exodus/Resources/FontResources.axaml" />
+                <ResourceInclude Source="avares://Exodus/Resources/SmoothScrollThemeResources.axaml" />
+                <ResourceInclude Source="avares://Exodus/Resources/CoinBanners.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:NumericUpDownValueConverter x:Key="NumericUpDownValueConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
