@@ -1,0 +1,36 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate x:Key="Banner0">
+        <UserControl Height="84"> <!-- Bitcoin -->
+            <Image Source="/Assets/Resources/Icons/bitcoin.png"
+                   Width="84" Stretch="Uniform"
+                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+        </UserControl>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Banner1">
+        <UserControl Height="104"> <!-- Ethereum -->
+            <StackPanel>
+                <Image Source="/Assets/Resources/Icons/ethereum_1.png"
+                       Width="84" Stretch="Uniform"
+                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                       HorizontalAlignment="Center" ZIndex="3"
+                       VerticalAlignment="Center" />
+                <Image Source="/Assets/Resources/Icons/ethereum_2.png"
+                       Width="73" Stretch="Uniform" Opacity="0.5"
+                       Margin="0,-63,0,0"
+                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                       HorizontalAlignment="Center" ZIndex="2"
+                       VerticalAlignment="Center" />
+                <Image Source="/Assets/Resources/Icons/ethereum_3.png"
+                       Width="60" Stretch="Uniform" Opacity="0.25"
+                       Margin="0,-50,0,0"
+                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                       HorizontalAlignment="Center" ZIndex="1"
+                       VerticalAlignment="Center" />
+            </StackPanel>
+        </UserControl>
+    </DataTemplate>
+</ResourceDictionary>
