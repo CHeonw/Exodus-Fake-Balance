@@ -1,0 +1,333 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Exodus.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:Exodus.Views"
+        xmlns:viewModels="clr-namespace:Exodus.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Exodus.Views.MainWindow"
+        x:DataType="viewModels:MainWindowViewModel"
+        Icon="/Assets/logo.ico"
+        Title="EXODUS 24.51.4"
+        Background="#0C0E0F"
+        MinWidth="900" MinHeight="660"
+        FontFamily="{StaticResource RobotoRegular}">
+
+    <Design.DataContext>
+        <viewModels:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Grid>
+        <Grid Classes.IsShow="{Binding NotificationViewModel.IsShow}"
+              Classes.NotIsShow="{Binding !NotificationViewModel.IsShow}"
+              IsVisible="{Binding NotificationViewModel.IsNotification}"
+              HorizontalAlignment="Right" ZIndex="1000" Margin="0,120,10,0"
+              VerticalAlignment="Top">
+            <Grid.Styles>
+                <Style Selector="Grid.IsShow">
+                    <Style.Animations>
+                        <Animation Duration="0:0:0.355" Easing="QuadraticEaseOut">
+                            <KeyFrame Cue="0%">
+                                <Setter Property="TranslateTransform.X" Value="370" />
+                                <Setter Property="TranslateTransform.Y" Value="0" />
+                            </KeyFrame>
+                            <KeyFrame Cue="70%">
+                                <Setter Property="TranslateTransform.X" Value="-18" />
+                                <Setter Property="TranslateTransform.Y" Value="0" />
+                            </KeyFrame>
+                            <KeyFrame Cue="100%">
+                                <Setter Property="TranslateTransform.X" Value="0" />
+                                <Setter Property="TranslateTransform.Y" Value="0" />
+                            </KeyFrame>
+                        </Animation>
+                    </Style.Animations>
+                </Style>
+                <Style Selector="Grid.NotIsShow">
+                    <Style.Animations>
+                        <Animation Duration="0:0:0.355" Easing="CircularEaseIn">
+                            <KeyFrame Cue="0%">
+                                <Setter Property="TranslateTransform.X" Value="0" />
+                                <Setter Property="TranslateTransform.Y" Value="0" />
+                            </KeyFrame>
+                            <KeyFrame Cue="30%">
+                                <Setter Property="TranslateTransform.X" Value="-18" />
+                                <Setter Property="TranslateTransform.Y" Value="0" />
+                            </KeyFrame>
+                            <KeyFrame Cue="100%">
+                                <Setter Property="TranslateTransform.X" Value="370" />
+                                <Setter Property="TranslateTransform.Y" Value="0" />
+                            </KeyFrame>
+                        </Animation>
+                    </Style.Animations>
+                </Style>
+            </Grid.Styles>
+            <views:NotificationView DataContext="{Binding NotificationViewModel}" />
+        </Grid>
+
+        <Grid IsVisible="{Binding ReceiveAddressViewModel.IsVisible}"
+              ZIndex="2000"
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <views:ReceiveAddressView DataContext="{Binding ReceiveAddressViewModel}"
+                                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </Grid>
+
+        <Grid IsVisible="{Binding RefreshViewModel.IsVisible}"
+              ZIndex="2000"
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <views:RefreshView DataContext="{Binding RefreshViewModel}"
+                                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </Grid>
+
+        <Grid RowDefinitions="Auto, *">
+            <Border Grid.Row="0" Padding="30,0,30,0">
+                <Grid Height="80" ColumnDefinitions="Auto, *, Auto">
+                    <Grid Column="0" ColumnDefinitions="Auto, *" VerticalAlignment="Center">
+                        <Image Grid.Column="0" Source="/Assets/Resources/Icons/exodus-logomark.png"
+                               RenderOptions.BitmapInterpolationMode="HighQuality"
+                               Width="36" Stretch="Uniform" VerticalAlignment="Center" />
+                        <Grid Grid.Column="1" ColumnDefinitions="Auto, *" Margin="18,0,0,0">
+                            <TextBlock Grid.Column="0" FontSize="17.6"
+                                       FontFamily="{StaticResource RobotoCondensedRegular}"
+                                       FontWeight="400" Opacity="0.5" Text="$" VerticalAlignment="Center"
+                                       Margin="0,0,0.75,0" />
+                            <TextBlock Grid.Column="1" FontSize="22"
+                                       FontFamily="{StaticResource RobotoCondensedRegular}"
+                                       FontWeight="400" Text="{Binding TotalBalanceInUsdPlayerString}"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                    <Grid Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal"
+                                    Spacing="-8">
+                            <Button Background="Transparent" Margin="0,2,1,2">
+                                <Image Source="/Assets/Resources/Icons/icon-global-nav-portfolio.png"
+                                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                                       Width="50" Stretch="Uniform" VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" />
+                            </Button>
+                            <Grid>
+                                <Button Background="Transparent" Margin="0,2,1,2">
+                                    <Image Source="/Assets/Resources/Icons/icon-global-nav-wallet.png"
+                                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                                           Width="50" Stretch="Uniform" VerticalAlignment="Center"
+                                           HorizontalAlignment="Center" />
+                                </Button>
+
+                                <Border CornerRadius="3" Width="40" Height="3"
+                                        Background="#49A6C4" Margin="0,0,0,-7.5"
+                                        VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                            </Grid>
+
+                            <Rectangle Height="25" Width="1" Fill="White" Opacity="0.15"
+                                       Margin="10,2,11,2" VerticalAlignment="Center" />
+
+                            <Button Background="Transparent" Margin="0,2,1,2">
+                                <Image Source="/Assets/Resources/Icons/icon-global-nav-exchange.png"
+                                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                                       Width="50" Stretch="Uniform" VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" />
+                            </Button>
+                            <Button Background="Transparent" Margin="0,2,1,2">
+                                <Image Source="/Assets/Resources/Icons/icon-global-nav-fiat-onramp.png"
+                                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                                       Width="50" Stretch="Uniform" VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" />
+                            </Button>
+                            <Button Background="Transparent" Margin="0,2,1,2">
+                                <Image Source="/Assets/Resources/Icons/icon-global-nav-earn-rewards.png"
+                                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                                       Width="50" Stretch="Uniform" VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" />
+                            </Button>
+
+                            <Rectangle Height="25" Width="1" Fill="White" Opacity="0.15"
+                                       Margin="10,2,11,2" VerticalAlignment="Center" />
+
+                            <Button Background="Transparent" Margin="0,2,1,2">
+                                <Image Source="/Assets/Resources/Icons/icon-global-nav-plus.png"
+                                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                                       Width="50" Stretch="Uniform" VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Column="2" ColumnDefinitions="*, *, *" VerticalAlignment="Center"
+                          Width="123">
+                        <Button Grid.Column="0" Background="Transparent"
+                                HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Viewbox Width="21">
+                                <Path Data="{DynamicResource History}"
+                                      Fill="#5E6061"
+                                      Stretch="Uniform" />
+                            </Viewbox>
+                        </Button>
+                        <Button Grid.Column="1" Background="Transparent"
+                                HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid>
+                                <Viewbox Width="18"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Path Data="{DynamicResource Support}"
+                                          Fill="#5E6061"
+                                          Stretch="Uniform" />
+                                </Viewbox>
+                                <Ellipse Width="22" Height="22" Fill="Transparent" Stroke="#5E6061"
+                                         StrokeThickness="1"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                        </Button>
+                        <Button Grid.Column="2" Background="Transparent"
+                                HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Viewbox Width="21">
+                                <Path Data="{DynamicResource Settings}"
+                                      Fill="#5E6061"
+                                      Stretch="Uniform" />
+                            </Viewbox>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Background="#131518" CornerRadius="26,26,0,0">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      RowDefinitions="Auto, *">
+                    <Grid Row="0" Height="60"
+                          ColumnDefinitions="Auto, Auto *">
+                        <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="#1AFFFFFF"
+                                Width="60" VerticalAlignment="Stretch">
+                            <Button Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Grid RowDefinitions="*, Auto" VerticalAlignment="Stretch">
+                                    <Image Grid.Row="0" Source="/Assets/Resources/Icons/filter.png"
+                                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                                           Width="23" Stretch="Uniform" VerticalAlignment="Center" Opacity="1"
+                                           HorizontalAlignment="Center" Margin="0,14,0,0" />
+                                    <Viewbox Grid.Row="1" HorizontalAlignment="Center" Width="8"
+                                             Margin="0,9,0,0">
+                                        <Path Data="{StaticResource PointDownFullArrow}"
+                                              Stretch="Uniform"
+                                              Fill="White" Opacity="0.3" />
+                                    </Viewbox>
+                                </Grid>
+                            </Button>
+                        </Border>
+                        <Border Grid.Column="1" BorderThickness="0,0,1,0" BorderBrush="#1AFFFFFF"
+                                Width="60" VerticalAlignment="Stretch">
+                            <Button Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Image Source="/Assets/Resources/Icons/icon-magnifying-glass.png"
+                                       Width="20" Stretch="Uniform" VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" />
+                            </Button>
+                        </Border>
+                        <ScrollViewer Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                      HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"
+                                      Theme="{StaticResource ScrollViewerWithMouse}"
+                                      IsScrollInertiaEnabled="True"
+                                      VerticalContentAlignment="Center">
+                            <ItemsControl ItemsSource="{Binding Coins}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Spacing="-5" Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid RowDefinitions="*, Auto">
+                                            <Grid Row="0">
+                                                <Image Source="/Assets/Resources/Icons/interest.png"
+                                                       IsVisible="{Binding IsShowPercentageIcon}"
+                                                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                                                       Width="10" Stretch="Uniform" Margin="10" 
+                                                       VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                                                <Grid Row="0" ColumnDefinitions="*, Auto">
+                                                    <Button Grid.Column="0" Background="Transparent"
+                                                            HorizontalAlignment="Stretch"
+                                                            VerticalContentAlignment="Center"
+                                                            Command="{Binding SelectedCommand}">
+                                                        <Border Width="155" Height="60" Padding="30,0">
+                                                            <Grid Width="155"
+                                                                  HorizontalAlignment="Stretch"
+                                                                  VerticalAlignment="Center">
+                                                                <Grid IsVisible="{Binding IsSelected}"
+                                                                      RowDefinitions="*, Auto"
+                                                                      HorizontalAlignment="Center"
+                                                                      VerticalAlignment="Center" Margin="0,17,0,0">
+                                                                    <TextBlock Grid.Row="0" FontSize="14"
+                                                                               FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                               FontWeight="400" Opacity="1"
+                                                                               Text="{Binding Name}"
+                                                                               VerticalAlignment="Center"
+                                                                               HorizontalAlignment="Center"
+                                                                               TextAlignment="Center"
+                                                                               Foreground="{Binding ViewPart.Foreground1}"
+                                                                               Margin="0,0,0,5" />
+                                                                    <Grid Row="1" HorizontalAlignment="Center"
+                                                                          VerticalAlignment="Center"
+                                                                          ColumnDefinitions="*, Auto"
+                                                                          Margin="0,0,0,4">
+                                                                        <TextBlock Grid.Column="0" FontSize="12"
+                                                                            Padding="0,0,0,13"
+                                                                            FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                            FontWeight="400" Opacity="0.7"
+                                                                            Text="{Binding Balance}"
+                                                                            TextAlignment="Center" Margin="0,0,2,0" />
+                                                                        <TextBlock Grid.Column="1" FontSize="12"
+                                                                            Margin="0,0,0,4"
+                                                                            FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                            FontWeight="400" Opacity="0.7"
+                                                                            Text="{Binding Symbol}"
+                                                                            TextAlignment="Center" />
+                                                                    </Grid>
+                                                                </Grid>
+                                                                <Grid IsVisible="{Binding !IsSelected}"
+                                                                      RowDefinitions="*, Auto"
+                                                                      HorizontalAlignment="Center"
+                                                                      VerticalAlignment="Center" Margin="0,15,0,0">
+                                                                    <TextBlock Grid.Row="0" FontSize="14"
+                                                                               FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                               FontWeight="400" Opacity="0.9"
+                                                                               Text="{Binding Name}"
+                                                                               VerticalAlignment="Center"
+                                                                               HorizontalAlignment="Center"
+                                                                               TextAlignment="Center"
+                                                                               Margin="0,0,0,4" />
+                                                                    <Grid Row="1" HorizontalAlignment="Center"
+                                                                          VerticalAlignment="Center"
+                                                                          ColumnDefinitions="*, Auto"
+                                                                          Margin="0,0,0,4">
+                                                                        <TextBlock Grid.Column="0" FontSize="12"
+                                                                            Padding="0,0,0,13"
+                                                                            FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                            FontWeight="400" Opacity="0.35"
+                                                                            Text="{Binding Balance}"
+                                                                            TextAlignment="Center" Margin="0,0,2,0" />
+                                                                        <TextBlock Grid.Column="1" FontSize="12"
+                                                                            Margin="0,0,0,4"
+                                                                            FontFamily="{StaticResource RobotoCondensedRegular}"
+                                                                            FontWeight="400" Opacity="0.35"
+                                                                            Text="{Binding Symbol}"
+                                                                            TextAlignment="Center" />
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Border>
+                                                    </Button>
+                                                    <Rectangle Grid.Column="1" Height="20" Width="1" Fill="White"
+                                                               Opacity="0.2"
+                                                               VerticalAlignment="Center" />
+                                                </Grid>
+                                            </Grid>
+                                            <Border Grid.Row="1" Height="2" Width="155"
+                                                    Background="{Binding ViewPart.Foreground1}"
+                                                    CornerRadius="5" IsVisible="{Binding IsSelected}"
+                                                    VerticalAlignment="Bottom" HorizontalAlignment="Stretch" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                    <views:CoinSpecificPartView Grid.Row="1" DataContext="{Binding SelectedCoinViewPart}" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
